@@ -1,0 +1,46 @@
+#!/bin/bash
+
+kill_broadsea() {
+  echo Killing broadsea...
+  docker kill broadsea
+  docker rm broadsea
+}
+
+start_broadsea() {
+  LOG_DRIVER=local
+  if [ ! -z "${enable_fluentd}" ]; then
+    LOG_DRIVER=fluentd
+  fi
+  echo Starting broadsea...
+  docker run -d \
+    -e PASSWORD=mypass \
+    -e WEBAPI_URL=http://192.168.99.100:8080 \
+    -e env=webapi-postgresql \
+    -e security_enabled=false \
+    -e security_origin=* \
+    -e datasource_driverClassName=org.postgresql.Driver \
+    -e datasource_url=jdbc:postgresql://192.168.99.100:5432/secret-database-name \
+    -e datasource.cdm.schema=cdm \
+    -e datasource.ohdsi.schema=ohdsi \
+    -e datasource_username=secret-user-name \
+    -e datasource_password=secret-user-password \
+    -e spring.jpa.properties.hibernate.default_schema=ohdsi \
+    -e spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect \
+    -e spring.batch.repository.tableprefix=ohdsi.BATCH_ \
+    -e flyway_datasource_driverClassName=org.postgresql.Driver \
+    -e flyway_datasource_url=jdbc:postgresql://192.168.99.100:5432/secret-database-name \
+    -e flyway_schemas=ohdsi \
+    -e flyway.placeholders.ohdsiSchema=ohdsi \
+    -e flyway_datasource_username=secret-user-name \
+    -e flyway_datasource_password=secret-user-password \
+    -e flyway.locations=classpath:db/migration/postgresql \
+    --restart always \
+    --name superset \
+    --log-driver=${log_driver} \
+    -p2181:8088 \
+    ${broadsea_webtools_image}
+}
+
+kill_broadsea
+
+start_broadsea
