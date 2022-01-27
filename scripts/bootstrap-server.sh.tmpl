@@ -14,7 +14,7 @@ start_broadsea() {
   echo Starting broadsea...
   docker run -d \
     -e PASSWORD=mypass \
-    -e WEBAPI_URL=http://192.168.99.100:8080 \
+    -e WEBAPI_URL=${webapi_url} \
     -e env=webapi-postgresql \
     -e security_enabled=false \
     -e security_origin=* \

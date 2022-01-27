@@ -39,11 +39,15 @@ resource "hsdp_container_host_exec" "server" {
       postgres_username              = module.postgres.credentials.username
       postgres_password              = module.postgres.credentials.password
       postgres_hostname              = module.postgres.credentials.hostname
+      omop_username                  = var.omop_data_username
+      omop_password                  = var.omop_data_password
+      omop_hostname                  = var.omop_data_hostname
       enable_fluentd                 = var.hsdp_product_key == "" ? "false" : "true"
       log_driver                     = var.hsdp_product_key == "" ? "local" : "fluentd"
       broadsea_webtools_image        = var.broadsea_webtools_image
       broadsea_methods_library_image = var.broadsea_methods_library_image
       broadsea_id                    = random_pet.deploy.id
+      webapi_url                     = "https://${cloudfoundry_route.broadsea_proxy.endpoint}"
     })
     destination = "/home/${var.user}/bootstrap-server.sh"
     permissions = "0755"

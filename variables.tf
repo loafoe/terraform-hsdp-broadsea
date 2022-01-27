@@ -138,3 +138,19 @@ variable "caddy_image" {
   description = "Caddy server image to use"
   default     = "caddy:2.4.5"
 }
+
+variable "omop_data_hostname" {
+  type        = string
+  description = "The OMOP database hostname"
+}
+
+variable "omop_data_username" {
+  type        = string
+  description = "The OMOP database username"
+}
+
+variable "omop_data_password" {
+  type        = string
+  description = "The OMOP database password"
+}
+
