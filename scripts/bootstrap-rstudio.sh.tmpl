@@ -1,0 +1,26 @@
+#!/bin/bash
+
+kill_rstudio() {
+  echo Killing rstudio...
+  docker kill rstudio || true
+  docker rm rstudio || true
+}
+
+start_rstudio() {
+  LOG_DRIVER=local
+  if [ ! -z "${enable_fluentd}" ]; then
+    LOG_DRIVER=fluentd
+  fi
+  echo Starting rstudio...
+  docker run -d \
+    -e PASSWORD=${password} \
+    --restart always \
+    --name rstudio \
+    --log-driver=${log_driver} \
+    -p10001:8787 \
+    ${rstudio_image}
+}
+
+kill_rstudio
+
+start_rstudio

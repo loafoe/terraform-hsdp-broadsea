@@ -11,7 +11,10 @@ resource "cloudfoundry_app" "superset_proxy" {
 
   environment = merge({
     CADDYFILE_BASE64 = base64encode(templatefile("${path.module}/templates/Caddyfile", {
-      upstream_url = "http://${hsdp_container_host.broadsea.private_ip}:10000"
+      webapi_hostname  = cloudfoundry_route.broadsea_proxy.endpoint
+      rstudio_hostname = cloudfoundry_route.rstudio_proxy.endpoint
+      webapi_url       = "http://${hsdp_container_host.broadsea.private_ip}:10000"
+      rstudio_url      = "http://${hsdp_container_host.broadsea.private_ip}:10001"
     }))
   }, {})
 
@@ -22,10 +25,20 @@ resource "cloudfoundry_app" "superset_proxy" {
   routes {
     route = cloudfoundry_route.broadsea_proxy.id
   }
+  //noinspection HCLUnknownBlockType
+  routes {
+    route = cloudfoundry_route.rstudio_proxy.id
+  }
 }
 
 resource "cloudfoundry_route" "broadsea_proxy" {
   domain   = data.cloudfoundry_domain.domain.id
   space    = data.cloudfoundry_space.space.id
   hostname = "tf-broadsea-${local.postfix}"
+}
+
+resource "cloudfoundry_route" "rstudio_proxy" {
+  domain   = data.cloudfoundry_domain.domain.id
+  space    = data.cloudfoundry_space.space.id
+  hostname = "tf-rstudio-${local.postfix}"
 }

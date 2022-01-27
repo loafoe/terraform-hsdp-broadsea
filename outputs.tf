@@ -1,6 +1,11 @@
-output "broadsea_proxy_endpoint" {
+output "webapi_endpoint" {
   description = "URL of the Broadsea proxy"
   value       = cloudfoundry_route.broadsea_proxy.endpoint
+}
+
+output "rstudio_endpoint" {
+  description = "URL of the Broadsea proxy"
+  value       = cloudfoundry_route.rstudio_proxy.endpoint
 }
 
 output "broadsea_ip" {

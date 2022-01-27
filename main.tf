@@ -54,6 +54,18 @@ resource "hsdp_container_host_exec" "server" {
   }
 
   file {
+    content = templatefile("${path.module}/scripts/bootstrap-rstudio.sh.tmpl", {
+      log_driver     = var.hsdp_product_key == "" ? "local" : "fluentd"
+      enable_fluentd = var.hsdp_product_key == "" ? "false" : "true"
+      password       = random_pet.deploy.id
+      rstudio_image  = var.broadsea_methods_library_image
+    })
+    destination = "/home/${var.user}/bootstrap-rstudio.sh"
+    permissions = "0755"
+  }
+
+
+  file {
     content = templatefile("${path.module}/scripts/bootstrap-fluent-bit.sh.tmpl", {
       ingestor_host    = data.hsdp_config.logging.url
       shared_key       = var.hsdp_shared_key
@@ -68,6 +80,7 @@ resource "hsdp_container_host_exec" "server" {
 
   commands = [
     "/home/${var.user}/bootstrap-fluent-bit.sh",
-    "/home/${var.user}/bootstrap-server.sh"
+    "/home/${var.user}/bootstrap-server.sh",
+    "/home/${var.user}/bootstrap-rstudio.sh"
   ]
 }

@@ -1,8 +1,17 @@
-:80 {
+${webapi_hostname}:80 {
   @insecure {
     header X-Forwarded-Proto http
   }
   redir @insecure https://{host}{uri} permanent
 
-  reverse_proxy ${upstream_url}
+  reverse_proxy ${webapi_url}
+}
+
+${rstudio_hostname}:80 {
+  @insecure {
+    header X-Forwarded-Proto http
+  }
+  redir @insecure https://{host}{uri} permanent
+
+  reverse_proxy ${rstudio_url}
 }
