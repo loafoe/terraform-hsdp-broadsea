@@ -43,7 +43,7 @@ resource "hsdp_container_host_exec" "server" {
       log_driver                     = var.hsdp_product_key == "" ? "local" : "fluentd"
       broadsea_webtools_image        = var.broadsea_webtools_image
       broadsea_methods_library_image = var.broadsea_methods_library_image
-      superset_id                    = random_pet.deploy.id
+      broadsea_id                    = random_pet.deploy.id
     })
     destination = "/home/${var.user}/bootstrap-server.sh"
     permissions = "0755"

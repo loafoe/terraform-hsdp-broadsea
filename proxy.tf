@@ -11,7 +11,7 @@ resource "cloudfoundry_app" "superset_proxy" {
 
   environment = merge({
     CADDYFILE_BASE64 = base64encode(templatefile("${path.module}/templates/Caddyfile", {
-      upstream_url = "http://${hsdp_container_host.broadsea.private_ip}:2181"
+      upstream_url = "http://${hsdp_container_host.broadsea.private_ip}:10000"
     }))
   }, {})
 
