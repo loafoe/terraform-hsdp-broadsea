@@ -43,20 +43,21 @@ provider "registry.terraform.io/hashicorp/random" {
 }
 
 provider "registry.terraform.io/philips-software/hsdp" {
-  version     = "0.29.5"
+  version     = "0.33.6"
   constraints = ">= 0.17.0, >= 0.29.3"
   hashes = [
-    "h1:rBT4WuFyCgg/gAUSvToMUGFM7Fh56ZjB4BkeKDJa008=",
-    "zh:14b1ed579bf276e7c7c44a62f2f0014621d6b681522052523b8643a0ddc02d06",
-    "zh:1739a557a8201a313b5dabf75d25bcc58a6ddf06d1cd4bd1deb0714efd8217cb",
-    "zh:37bafa31faf06615af8d6b1a401db1591244cd0e041f9a73b02e7ab6d6e89169",
-    "zh:37fd4c04c4cf4c77cbc69335c3603a32bb2509ad60b518e6c818112e2aba353d",
-    "zh:4714c26531ea0f2644eab665955fc2c9ffb39cf912bcfaa1062e164af85d12a6",
-    "zh:67c768f70a813378744066de90a43f8b5bb0728cf699b1059155fce5afcee83a",
-    "zh:9c814c9239ffabcad9bd349ed5b6b0426a08f6ddfcece4a6170dfb508d80b067",
-    "zh:9d47b5c873867fe3331500acaec389845a9fa0ebd17be9456668d7d524550dd1",
-    "zh:de0a638a3d04502a1cb5d3fc6542098507e93f3f8eb53e52792e871de2a6808f",
-    "zh:de91bbdf59c622e6cd690e8126847fd72e23b0fc90a49591b1db53302a583c4f",
-    "zh:f41af46915fd8cf32391b98bc55224b459cec7165e59c9f31af778a9e596b262",
+    "h1:uQynYRVtSRJLQgKuDD/A3YlXu8f9Xpqu1Oxkk1wCSmI=",
+    "zh:023c992c940f3eafa6f3289bf5e2f8f7ba731d1ce65ecbb158524f11c168cc49",
+    "zh:0fceee09cee20e50205efb4a7ee6314c7a0eae4f515cbbcfb4fe81fdcad84b9d",
+    "zh:21bf9aa5b1f05aee6bc73e5df3c36b11414c55cc45ec384f7e080f6621eb1a39",
+    "zh:3d098c116524b777ccb3983cd77f2cacd69a0fa39028b8e4341db5743594dbbb",
+    "zh:6eeef9a1e791215c0b59c69e8d644322190cc7681289ecd81ea38f8840cb006c",
+    "zh:7ebae032b79d4962834eeef645d5516a0593c401d83ca0766b25fa075270dbe0",
+    "zh:90de47bc9db24d5da4e82919dd1eb1fecfb91581b0b7e03423c85d0de0949e7d",
+    "zh:92cf23c4b5d7a13560c23cb3f0b401a59891a3907ff70afb9d722a099e01ebf0",
+    "zh:cd803f740490091cd8e1291572ed453de5f256bdba494c6b593e706204d07c05",
+    "zh:ce6de0ac5532e4c28f3527d61f694c73ee048c65a2f5833ec83de75f1c5089c0",
+    "zh:d8d96de8e84af51e923f4b70cf47a6c208ff434c9ae317ff17c04f65d98d8b71",
+    "zh:f569b65999264a9416862bca5cd2a6177d94ccb0424f3a4ef424428912b9cb3c",
   ]
 }
